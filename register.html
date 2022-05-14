@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="box">
+    <!--Render page method - renders the message below if conditions are met in main.py-->
+    <!--{% if email_exists %}
+    <h1>{{email_exists}}</h1>
+    {% else %}
+	<h1>Register</h1>
+    {% endif %}-->
+
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages %}
+    <p>{{ message }}</p>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+    <form action="{{url_for('register')}}" method="post">
+    	<input type="text" name="name" placeholder="Name" required="required" />
+		<input type="email" name="email" placeholder="Email" required="required" />
+        <input type="password" name="password" placeholder="Password" required="required" />
+        <button type="submit" class="btn btn-primary btn-block btn-large">Sign me up.</button>
+    </form>
+</div>
+
+{% endblock %}

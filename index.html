@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="box">
+    {% if logged_out_user %}
+    <h1>{{logged_out_user}}</h1>
+    {% else %}
+	<h1>Flask Authentication</h1>
+    {% endif %}
+
+    {% if current_user.is_anonymous %}
+      <a href="{{ url_for('login') }}" class="btn btn-primary btn-block btn-large">Login</a>
+      <a href="{{ url_for('register') }}" class="btn btn-secondary btn-block btn-large">Register</a>
+    {% endif %}
+</div>
+
+{% endblock %}

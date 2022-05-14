@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="box">
+    {% if logged_in_message %}
+    <h1>{{logged_in_message}}</h1>
+    {% elif invalid_username_password %}
+    <h1>{{invalid_username_password}}</h1>
+    {% else %}
+    <h1>Login</h1>
+    {% endif %}
+
+    <!--Message with flash-->
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages %}
+    <p>{{ message }}</p>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+    <form action="{{ url_for('login') }}" method="post">
+        <!--Hidden input field to identify if form was submitted - by its name and value-->
+        <input type="hidden" name="building" value="casinos">
+        <input type="text" name="email" placeholder="Email" required="required"/>
+        <input type="password" name="password" placeholder="Password" required="required"/>
+        <button type="submit" class="btn btn-primary btn-block btn-large">Let me in.</button>
+    </form>
+</div>
+
+
+{% endblock %}
